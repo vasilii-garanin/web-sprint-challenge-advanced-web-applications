@@ -1,8 +1,25 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import axiosWithAuth from './../utils/axiosWithAuth';
+const Logout = (props) =>
+{
 
-const Logout = () => {        
-    return(<div></div>);
-}
+    useEffect(() =>
+    {
+        axiosWithAuth()
+            .post('/logout')
+            .then(resp =>
+            {
+                console.log('Log out form');
+                localStorage.removeItem("token");
+                props.history.push('/login');
+            }).catch(err =>
+            {
+                console.log(err);
+            });
+    }, []);
+
+    return (<div>Log out</div>);
+};
 
 export default Logout;
 

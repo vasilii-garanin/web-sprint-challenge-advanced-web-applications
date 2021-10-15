@@ -1,5 +1,5 @@
 import React from 'react';
-import { Route, Redirect } from "react-router-dom";
+import { Route, Switch } from "react-router-dom";
 import PrivateRoute from './PrivateRoute';
 import styled from 'styled-components';
 
@@ -9,19 +9,22 @@ import View from './View';
 import Login from './Login';
 import Logout from './Logout';
 
-const App = () => {
-  return (
-    <AppContainer>
-      <LambdaHeader/>
-      <Header/>
-      <RouteContainer>
-        <Route exact path="/">
-          <Login/>
-        </Route>          
-      </RouteContainer>
-    </AppContainer>
-  )
-}
+const App = () =>
+{
+    return (
+        <AppContainer>
+            <LambdaHeader />
+            <Header />
+            <RouteContainer>
+                <Switch>
+                    <PrivateRoute exact path="/protected" component={View} />
+                    <PrivateRoute path="/logout" component={Logout} />
+                    <Route exact path="/" component={Login} />
+                </Switch>
+            </RouteContainer>
+        </AppContainer>
+    );
+};
 
 export default App;
 
@@ -34,10 +37,10 @@ export default App;
 
 const AppContainer = styled.div`
   height: 100%;
-`
+`;
 const RouteContainer = styled.div`
   display: flex;
   height: 85%;
   align-items: center;
   flex-direction: column;
-`
+`;
