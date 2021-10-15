@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import axiosWithAuth from '../utils/axiosWithAuth';
 import Article from './Article';
 import EditForm from './EditForm';
+import axios from 'axios';
 
 const View = (props) =>
 {
@@ -30,6 +31,18 @@ const View = (props) =>
 
     const handleDelete = (id) =>
     {
+        axios.delete(`http://localhost:5000/api/articles/:id`)
+            .then(resp =>
+            {
+                deleteItem(id);
+                
+            })
+            .catch(err =>
+            {
+                console.log(err);
+            });
+        
+        console.log("clicked delete");
     };
 
     const handleEdit = (article) =>
