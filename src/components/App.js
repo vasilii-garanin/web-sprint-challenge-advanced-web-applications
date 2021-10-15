@@ -17,7 +17,7 @@ const App = () =>
             <Header />
             <RouteContainer>
                 <Switch>
-                    <PrivateRoute exact path="/protected" component={View} />
+                    <PrivateRoute exact path="/view" component={View} />
                     <PrivateRoute path="/logout" component={Logout} />
                     <Route exact path="/" component={Login} />
                 </Switch>
